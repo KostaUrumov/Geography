@@ -1,0 +1,23 @@
+﻿@using GeographyCore.ViewModels.CountryModels
+@model List<ShowCountriesModel>
+
+@{
+    ViewBag.Title = "All Countries";
+}
+
+<div class="text-center row">
+    @foreach (var country in Model)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@country.Flag" alt="Flag">
+            <div class="card-body">
+
+                <h5 class="card-title mt-1">@country.Name</h5>
+                <p class="mb-0">Population: @country.Population</p>
+                <p class="mb-0">Land: @country.Area</p>
+                <p>Continent: @country.Continent</p>
+            </div>
+        </div>
+    }
+</div>

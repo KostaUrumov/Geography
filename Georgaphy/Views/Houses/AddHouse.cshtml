@@ -1,0 +1,59 @@
+﻿@using GeographyCore.ViewModels.HouseModels
+@model AddHouseViewModel
+
+
+@{
+    ViewBag.Title = "Add House";
+
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+@if (Model.Streets.Count == 0)
+{
+    <h3>Can Not add a House. There are no Streets in our Database! Please add a Street first</h3>
+}
+else
+{
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="mb-3">
+                <label asp-for="@Model.Address" class="form-label">Address Number</label>
+                <input asp-for="@Model.Address" class="form-control" aria-required="true" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.StreetId" class="form-label">Street</label>
+                <select asp-for="@Model.StreetId" class="form-control">
+                    @foreach (var street in Model.Streets)
+                    {
+                        <option value="@street.Id">@street.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="StreetId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.NumberOfFloors" class="form-label">Floors</label>
+                <input asp-for="@Model.NumberOfFloors" class="form-control" aria-required="true" />
+                <span asp-validation-for="NumberOfFloors" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Rooms" class="form-label">Rooms</label>
+                <input asp-for="@Model.Rooms" class="form-control" aria-required="true" />
+                <span asp-validation-for="Rooms" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Add" />
+            </div>
+        </form>
+    </div>
+</div>
+}
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
