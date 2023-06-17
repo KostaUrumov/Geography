@@ -30,9 +30,13 @@ namespace Georgaphy.Controllers
         [HttpPost]
         public async Task <IActionResult> AddCountry(AddCountryViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             await countryServ.addCountryAsync(model);
 
-             return RedirectToAction ("AllCountries");
+            return RedirectToAction ("AllCountries");
         }
 
         public IActionResult AllCountries()

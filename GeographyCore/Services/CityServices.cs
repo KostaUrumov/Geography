@@ -1,12 +1,12 @@
-﻿using GeographyCore.ViewModels.CityModels;
+﻿using GeographyCore.Contracts;
+using GeographyCore.ViewModels.CityModels;
 using GeographyStracture.Data.Entities;
 using GeorgaphyStracture.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 namespace GeographyCore.Services
 {
-    public class CityServices
+    public class CityServices : IService<AddNewCityModel>
     {
         private readonly GeographyDb data;
 
@@ -15,7 +15,7 @@ namespace GeographyCore.Services
             data = _data;
         }
 
-        public async Task AddcityAsync(AddNewCityModel model)
+        public async Task Add(AddNewCityModel model)
         {
             City cityNew = new City()
             {
@@ -30,24 +30,24 @@ namespace GeographyCore.Services
             await data.SaveChangesAsync();
         }
 
-        public List<ShowCityModelView> ListAllCities()
+        public List<AddNewCityModel> ListAll()
         {
-              List<ShowCityModelView> result = data
+              List<AddNewCityModel> result = data
                 .Cities
                 .Include(c => c.Country)
-                .Select(x => new ShowCityModelView
+                .Select(x => new AddNewCityModel
                 {
                     Name = x.Name,
                     Country = x.Country.Name,
                     Population = x.Population,
-                    Landscape = x.LandscapePicture,
+                    LandscapePicture = x.LandscapePicture,
                     Area = x.Area
                 })
                 .ToList();
 
             return result;
         }
-
+        
     }
 }
 

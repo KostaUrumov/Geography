@@ -14,6 +14,8 @@ namespace GeographyCore.ViewModels.CityModels
         
         public int CountryId { get; set; }
 
+        public string Country { get; set; } = null!;
+
         [Required]
         public double Area { get; set; }
 

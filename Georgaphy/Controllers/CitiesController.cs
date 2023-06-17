@@ -29,13 +29,14 @@ namespace Georgaphy.Controllers
 
         public async Task<IActionResult> Add(AddNewCityModel city)
         {
-            await cityServices.AddcityAsync(city);
+            
+            await cityServices.Add(city);
             return RedirectToAction("All");
         }
 
         public IActionResult All()
         {
-            return View(cityServices.ListAllCities());
+            return View(cityServices.ListAll());
         }
 
     }

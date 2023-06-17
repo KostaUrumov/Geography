@@ -32,6 +32,10 @@ namespace Georgaphy.Controllers
         [HttpPost]
         public async Task<IActionResult> AddHouse(AddHouseViewModel house)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             await serviceHouse.AddHouseAsync(house);
             return RedirectToAction("AllHouses");
         }

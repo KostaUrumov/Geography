@@ -1,5 +1,5 @@
 ﻿@using GeographyCore.ViewModels.CityModels
-@model List<ShowCityModelView>
+@model List<AddNewCityModel>
 
 @{
     ViewBag.Title = "All Countries";
@@ -10,13 +10,13 @@
     {
         <div class="card col-4" style="width: 20rem;">
             <img class="card-img-top" style="width: 18rem;"
-             src="@city.Landscape" alt="Flag">
+             src="@city.LandscapePicture" alt="Flag">
             <div class="card-body">
 
                 <h5 class="card-title mt-1">@city.Name</h5>
                 <p class="mb-0">Population: @city.Population</p>
                 <p class="mb-0">Land: @city.Area</p>
-                <p>Continent: @city.Country</p>
+                <p>Country: @city.Country</p>
             </div>
         </div>
     }

@@ -29,6 +29,10 @@ namespace Georgaphy.Controllers
         [HttpPost]
         public async Task<IActionResult> AddStreet(AddStreetViewModel street)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             await streetServ.AddStreetAsync(street);
             return RedirectToAction("AllStreets");
         }
