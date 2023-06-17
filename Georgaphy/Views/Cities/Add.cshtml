@@ -9,6 +9,14 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
+@if (Model.Countries.Count() == 0)
+{
+    <h3>Can Not add a City. There are no Coutries in our Database!
+        Please add a Country first</h3>
+}
+else
+{
+
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post">
@@ -48,6 +56,7 @@
         </form>
     </div>
 </div>
+}
 
 
 @section Scripts {
