@@ -3,15 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeographyStracture.Data.Entities
 {
-    public class Desert
+    public class River
     {
         public int Id { get; set; }
 
         [Required]
-        [StringLength(DataConstraints.Desert.MaxNameLength)]
+        [StringLength(DataConstraints.River.MaxNameLength)]
         public string Name { get; set; } = null!;
 
-        public int Area { get; set; }
+        [Required]
+        public int Lenghth { get; set; }
 
         public int ContinentId { get; set; }
 

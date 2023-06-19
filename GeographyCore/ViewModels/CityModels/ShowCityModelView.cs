@@ -6,6 +6,6 @@
         public string Country { get; set; } = null!;
         public int Population { get; set; }
         public double Area { get; set; }
-        public string Landscape { get; set; }
+        public string Landscape { get; set; } = null!;
     }
 }

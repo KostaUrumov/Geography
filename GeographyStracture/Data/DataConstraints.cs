@@ -32,5 +32,17 @@
             public const int MaxNameLength = 50;
         }
 
+        public class River
+        {
+            public const int MinNameLength = 2;
+            public const int MaxNameLength = 30;
+        }
+
+        public class Mountine
+        {
+            public const int MinNameLength = 2;
+            public const int MaxNameLength = 30;
+        }
+
     }
 }

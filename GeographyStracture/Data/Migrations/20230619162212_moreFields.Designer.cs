@@ -4,6 +4,7 @@ using GeorgaphyStracture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeorgaphyStructure.Data.Migrations
 {
     [DbContext(typeof(GeographyDb))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230619162212_moreFields")]
+    partial class moreFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,22 +170,12 @@ namespace GeorgaphyStructure.Data.Migrations
                     b.Property<int>("Area")
                         .HasColumnType("int");
 
-                    b.Property<int>("ContinentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContinentId");
-
-                    b.HasIndex("CountryId");
 
                     b.ToTable("Deserts");
                 });
@@ -227,12 +219,6 @@ namespace GeorgaphyStructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ContinentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Lenghth")
                         .HasColumnType("int");
 
@@ -242,10 +228,6 @@ namespace GeorgaphyStructure.Data.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContinentId");
-
-                    b.HasIndex("CountryId");
 
                     b.ToTable("Rivers");
                 });
@@ -474,45 +456,7 @@ namespace GeorgaphyStructure.Data.Migrations
                     b.Navigation("Continent");
                 });
 
-            modelBuilder.Entity("GeographyStracture.Data.Entities.Desert", b =>
-                {
-                    b.HasOne("GeographyStracture.Data.Entities.Continent", "Continent")
-                        .WithMany()
-                        .HasForeignKey("ContinentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GeographyStracture.Data.Entities.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Continent");
-
-                    b.Navigation("Country");
-                });
-
             modelBuilder.Entity("GeographyStracture.Data.Entities.Mountaine", b =>
-                {
-                    b.HasOne("GeographyStracture.Data.Entities.Continent", "Continent")
-                        .WithMany()
-                        .HasForeignKey("ContinentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GeographyStracture.Data.Entities.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Continent");
-
-                    b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("GeographyStracture.Data.Entities.River", b =>
                 {
                     b.HasOne("GeographyStracture.Data.Entities.Continent", "Continent")
                         .WithMany()
