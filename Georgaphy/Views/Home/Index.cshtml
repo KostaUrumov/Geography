@@ -16,7 +16,7 @@
             
             <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
                 <div class="text-center">
-                    <h2>@house.Name</h2>
+                    <a class="navbar-brand" asp-area="" asp-controller="Cities" asp-action="All"> <h2>@house.Name</h2></a>
                 </div>
                 <img class="d-block w-100" style="height:500px"
                  src="@house.PctureUrl">
