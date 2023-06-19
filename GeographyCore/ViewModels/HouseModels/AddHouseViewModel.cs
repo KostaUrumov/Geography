@@ -8,8 +8,6 @@ namespace GeographyCore.ViewModels.HouseModels
         [Required]
         public int StreetId { get; set; }
 
-        public ICollection<Street> Streets { get; set; } = new List<Street>();
-
         [Required]
         public int NumberOfFloors { get; set; }
 

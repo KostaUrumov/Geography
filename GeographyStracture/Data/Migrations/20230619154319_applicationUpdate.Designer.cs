@@ -4,6 +4,7 @@ using GeorgaphyStracture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeorgaphyStructure.Data.Migrations
 {
     [DbContext(typeof(GeographyDb))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230619154319_applicationUpdate")]
+    partial class applicationUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -356,7 +358,7 @@ namespace GeorgaphyStructure.Data.Migrations
             modelBuilder.Entity("GeographyStracture.Data.Entities.City", b =>
                 {
                     b.HasOne("GeographyStracture.Data.Entities.Country", "Country")
-                        .WithMany()
+                        .WithMany("Cities")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -367,7 +369,7 @@ namespace GeorgaphyStructure.Data.Migrations
             modelBuilder.Entity("GeographyStracture.Data.Entities.Country", b =>
                 {
                     b.HasOne("GeographyStracture.Data.Entities.Continent", "Continent")
-                        .WithMany()
+                        .WithMany("Countries")
                         .HasForeignKey("ContinentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -424,6 +426,16 @@ namespace GeorgaphyStructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.Continent", b =>
+                {
+                    b.Navigation("Countries");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.Country", b =>
+                {
+                    b.Navigation("Cities");
                 });
 #pragma warning restore 612, 618
         }

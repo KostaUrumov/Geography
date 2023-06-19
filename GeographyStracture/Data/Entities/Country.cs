@@ -10,11 +10,9 @@ namespace GeographyStracture.Data.Entities
         [Required]
         [StringLength(DataConstraints.Country.MaxCountryNameLength)]
         public string Name { get; set; } = null!;
-
-        [Required]
+       
         public int ContinentId { get; set; }
-
-        [ForeignKey(nameof(ContinentId))]
+        
         public Continent Continent { get; set; } = null!;
 
         [Required]
@@ -30,7 +28,5 @@ namespace GeographyStracture.Data.Entities
         [StringLength(DataConstraints.Country.MaxUrlLength)]
         public string FlagUrl { get; set; } = null!;
         public int CapitalCityId { get; set; }
-        
-        public List<City> Cities { get; set; } = new List<City>();
     }
 }

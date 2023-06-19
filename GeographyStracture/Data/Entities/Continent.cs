@@ -15,6 +15,5 @@ namespace GeographyStracture.Data.Entities
         [StringLength(DataConstraints.Continent.MaxUrlLength)]
         public string PctureUrl { get; set; } = null!;
 
-        public List<Country> Countries { get; set; } = new List<Country>();
     }
 }

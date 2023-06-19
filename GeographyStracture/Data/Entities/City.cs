@@ -10,7 +10,7 @@ namespace GeographyStracture.Data.Entities
         [Required]
         [StringLength(DataConstraints.City.MaxNameLength)]
         public string Name { get; set; } = null!;
-        [Required]
+       
         public int CountryId { get; set; }
 
         [ForeignKey(nameof(CountryId))]
@@ -26,6 +26,5 @@ namespace GeographyStracture.Data.Entities
         [StringLength(DataConstraints.City.MaxUrlLength)]
         public string LandscapePicture { get; set; } = null!;
 
-        public List<Street> Streets { get; set; } = new List<Street>();
     }
 }

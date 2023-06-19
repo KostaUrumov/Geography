@@ -24,8 +24,7 @@ namespace GeographyCore.Services
                 ContinentId = model.ContinentId,
                 Population = model.Population,
                 RoadsKm = model.RoadsKm,
-                FlagUrl = model.FlagUrl,
-                Cities = new List<City>()
+                FlagUrl = model.FlagUrl
             };
 
             await data.Countries.AddAsync(countryNew);

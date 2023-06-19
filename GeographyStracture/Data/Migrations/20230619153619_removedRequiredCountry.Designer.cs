@@ -4,6 +4,7 @@ using GeorgaphyStracture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeorgaphyStructure.Data.Migrations
 {
     [DbContext(typeof(GeographyDb))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230619153619_removedRequiredCountry")]
+    partial class removedRequiredCountry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,6 +153,59 @@ namespace GeorgaphyStructure.Data.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("GeographyStracture.Data.Entities.House", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Address")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfFloors")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rooms")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StreetId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StreetId");
+
+                    b.ToTable("Houses");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.Street", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Length")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Streets");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -222,6 +277,9 @@ namespace GeorgaphyStructure.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("HouseId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -256,6 +314,8 @@ namespace GeorgaphyStructure.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HouseId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -356,7 +416,7 @@ namespace GeorgaphyStructure.Data.Migrations
             modelBuilder.Entity("GeographyStracture.Data.Entities.City", b =>
                 {
                     b.HasOne("GeographyStracture.Data.Entities.Country", "Country")
-                        .WithMany()
+                        .WithMany("Cities")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -367,12 +427,34 @@ namespace GeorgaphyStructure.Data.Migrations
             modelBuilder.Entity("GeographyStracture.Data.Entities.Country", b =>
                 {
                     b.HasOne("GeographyStracture.Data.Entities.Continent", "Continent")
-                        .WithMany()
+                        .WithMany("Countries")
                         .HasForeignKey("ContinentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Continent");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.House", b =>
+                {
+                    b.HasOne("GeographyStracture.Data.Entities.Street", "Street")
+                        .WithMany("Houses")
+                        .HasForeignKey("StreetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Street");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.Street", b =>
+                {
+                    b.HasOne("GeographyStracture.Data.Entities.City", "City")
+                        .WithMany("Streets")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -382,6 +464,13 @@ namespace GeorgaphyStructure.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.HasOne("GeographyStracture.Data.Entities.House", null)
+                        .WithMany("Residents")
+                        .HasForeignKey("HouseId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -424,6 +513,31 @@ namespace GeorgaphyStructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.City", b =>
+                {
+                    b.Navigation("Streets");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.Continent", b =>
+                {
+                    b.Navigation("Countries");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.Country", b =>
+                {
+                    b.Navigation("Cities");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.House", b =>
+                {
+                    b.Navigation("Residents");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.Street", b =>
+                {
+                    b.Navigation("Houses");
                 });
 #pragma warning restore 612, 618
         }
