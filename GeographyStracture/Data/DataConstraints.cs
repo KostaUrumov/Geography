@@ -26,13 +26,11 @@
             public const int MaxUrlLength = 200;
         }
 
-        public class Street
+        public class Desert
         {
-            public const int MinNameLength = 2;
-            public const int MaxNameLength = 60;
-
-            public const int MaxUrlLength = 200;
-
+            public const int MinNameLength = 3; 
+            public const int MaxNameLength = 50;
         }
+
     }
 }

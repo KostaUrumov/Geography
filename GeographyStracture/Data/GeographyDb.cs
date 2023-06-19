@@ -76,6 +76,7 @@ namespace GeorgaphyStracture.Data
             data.Add(three);
             data.Add(four);
             data.Add(five);
+            data.Add(six);
 
             return data;
         }
