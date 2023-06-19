@@ -9,16 +9,14 @@
 </div>
 
 
-<div class="text-center row">
+<div class="text row">
     @foreach (var high in Model)
     {
-        <div class="card col-4" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title mt-1">@high.Name</h5>
-                <p class="mb-0">Land: @high.Area</p>
-                <p>Continent: @high.Continent</p>
-                <p class="mb-0">Population: @high.Country</p>
-            </div>
+        <div class="card-body">
+            <h5 class="card-title mt-1">@high.Name</h5>
+            <p class="mb-0">Land: @high.Area</p>
+            <p>Continent: @high.Continent</p>
+            <p>Country: @high.Country</p>
         </div>
     }
 </div>

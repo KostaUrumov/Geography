@@ -22,10 +22,6 @@
                         @if (this.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="navbar-brand" asp-area="" asp-controller="Countries" asp-action="AddCountry">Add Country</a>
-                            </li>
-
-                            <li class="nav-item">
                                 <a class="navbar-brand" asp-area="" asp-controller="Countries" asp-action="AllCountries">All Countries</a>
                             </li>
                              <li class="nav-item">
@@ -34,8 +30,10 @@
                             <li class="nav-item">
                                 <a class="navbar-brand" asp-area="" asp-controller="Mountaines" asp-action="All">All Mountines</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="navbar-brand" asp-area="" asp-controller="Rivers" asp-action="All">All Rivers</a>
+                            </li>
                         }
-
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
