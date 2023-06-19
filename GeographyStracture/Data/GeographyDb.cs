@@ -24,7 +24,6 @@ namespace GeorgaphyStracture.Data
         public DbSet<City> Cities { get; set; } = null!;
         public DbSet<Continent> Continents { get; set; } = null!;
         public DbSet<Country> Countries { get; set; } = null!;
-        public DbSet<Desert> Deserts { get; set; } = null!;
         public DbSet<River> Rivers { get; set; } = null!;
         public DbSet<Mountaine> Mountines { get; set; } = null!;
 

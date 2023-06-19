@@ -2,8 +2,12 @@
 @model List<AddNewCityModel>
 
 @{
-    ViewBag.Title = "All Countries";
+    ViewBag.Title = "All Cities";
 }
+
+<div class="text-center">
+    <a class="navbar-brand" asp-area="" asp-controller="Cities" asp-action="Add">Add new City</a>
+</div>
 
 <div class="text-center row">
     @foreach (var city in Model)

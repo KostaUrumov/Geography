@@ -25,6 +25,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ContinentService>();
 builder.Services.AddScoped<CountryServices>();
 builder.Services.AddScoped<CityServices>();
+builder.Services.AddScoped<MountaineService>();
 
 var app = builder.Build();
 

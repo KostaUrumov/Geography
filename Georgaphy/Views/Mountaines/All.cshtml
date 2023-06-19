@@ -1,0 +1,24 @@
+﻿@model List<AddMounainrViewModel>
+
+@{
+    ViewBag.Title = "All Mountines";
+}
+
+<div class="text-center">
+    <a class="navbar-brand" asp-area="" asp-controller="Mountaines" asp-action="Add">Add new Mountine</a>
+</div>
+
+
+<div class="text-center row">
+    @foreach (var high in Model)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title mt-1">@high.Name</h5>
+                <p class="mb-0">Land: @high.Area</p>
+                <p>Continent: @high.Continent</p>
+                <p class="mb-0">Population: @high.Country</p>
+            </div>
+        </div>
+    }
+</div>
