@@ -32,9 +32,27 @@ namespace GeographyCore.Services
 
         public List<AddNewCityModel> ListAll()
         {
-              List<AddNewCityModel> result = data
+            List<AddNewCityModel> result = data
+              .Cities
+              .Include(c => c.Country)
+              .Select(x => new AddNewCityModel
+              {
+                  Name = x.Name,
+                  Country = x.Country.Name,
+                  Population = x.Population,
+                  LandscapePicture = x.LandscapePicture,
+                  Area = x.Area
+              })
+              .ToList();
+            return result;
+        }
+
+        public List<AddNewCityModel> AllInGivenCountry(GeographyStracture.Data.Entities.Country country)
+        {
+            List<AddNewCityModel> result = data
                 .Cities
                 .Include(c => c.Country)
+                .Where(x=>x.CountryId == country.Id)
                 .Select(x => new AddNewCityModel
                 {
                     Name = x.Name,
@@ -44,10 +62,8 @@ namespace GeographyCore.Services
                     Area = x.Area
                 })
                 .ToList();
-
             return result;
         }
-        
     }
 }
 

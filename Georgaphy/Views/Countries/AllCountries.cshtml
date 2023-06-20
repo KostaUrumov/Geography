@@ -19,7 +19,9 @@
              src="@country.Flag" alt="Flag">
             <div class="card-body">
 
-                <h5 class="card-title mt-1">@country.Name</h5>
+                <form class="input-group-sm" asp-route-countryName="@country.Name" asp-controller="Cities" asp-action="AllInGivenCountry" method="post">
+                    <input type="submit" value="@country.Name" class="fs-6 btn btn-success mb-3 p-2" />
+                </form>
                 <p class="mb-0">Population: @country.Population</p>
                 <p class="mb-0">Land: @country.Area</p>
                 <p>Continent: @country.Continent</p>
