@@ -64,6 +64,26 @@ namespace GeographyCore.Services
                 .ToList();
             return result;
         }
+
+        public List<AddNewCityModel> AllInGivenContinent(Continent continent)
+        {
+            List<AddNewCityModel> result = data
+                .Cities
+                .Where(x=>x.Country.Continent.Name == continent.Name)
+                .Select(x => new AddNewCityModel
+                {
+                    Name = x.Name,
+                    Country = x.Country.Name,
+                    Population = x.Population,
+                    LandscapePicture = x.LandscapePicture,
+                    Area = x.Area
+                })
+                .ToList();
+            return result;
+
+
+
+        }
     }
 }
 

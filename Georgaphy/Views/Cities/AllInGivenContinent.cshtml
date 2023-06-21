@@ -5,12 +5,11 @@
 }
 
 <div class="text-center row">
-    <h2>All cities in @Model[0].Country</></h2>
     @foreach (var city in Model)
     {
         <div class="card col-4" style="width: 20rem;">
             <img class="card-img-top" style="width: 18rem;"
-                 src="@city.LandscapePicture" alt="Flag">
+             src="@city.LandscapePicture" alt="Flag">
             <div class="card-body">
 
                 <h5 class="card-title mt-1"> @city.Name</h5>

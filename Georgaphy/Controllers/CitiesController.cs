@@ -50,5 +50,15 @@ namespace Georgaphy.Controllers
             return View(cityServices.AllInGivenCountry(country));
         }
 
+        public IActionResult AllInGivenContinent(string continentName)
+        {
+            Continent continent = data.Continents.First(x => x.Name == continentName);
+            if (continent == null)
+            {
+                return RedirectToAction("All");
+            }
+            return View(cityServices.AllInGivenContinent(continent));
+        }
+
     }
 }
