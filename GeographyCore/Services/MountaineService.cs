@@ -2,6 +2,7 @@
 using GeographyCore.ViewModels.MountaineModels;
 using GeographyStracture.Data.Entities;
 using GeorgaphyStracture.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeographyCore.Services
 {
@@ -65,6 +66,16 @@ namespace GeographyCore.Services
                 .ToList();
 
             return result;
+        }
+
+        public bool CheckIfItemIsThere(string name)
+        {
+            var findMountaine = data.Mountines.FirstOrDefaultAsync(x => x.Name == name);
+            if (findMountaine != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

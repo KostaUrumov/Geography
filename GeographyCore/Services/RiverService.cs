@@ -2,6 +2,7 @@
 using GeographyCore.ViewModels.RiverModels;
 using GeographyStracture.Data.Entities;
 using GeorgaphyStracture.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeographyCore.Services
 {
@@ -57,6 +58,16 @@ namespace GeographyCore.Services
                 .ToList();
 
             return result;
+        }
+
+        public bool CheckIfItemIsThere(string name)
+        {
+            var findRiver = data.Rivers.FirstOrDefaultAsync(x => x.Name == name);
+            if (findRiver != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

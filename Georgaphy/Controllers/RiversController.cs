@@ -39,6 +39,12 @@ namespace Georgaphy.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            bool isThere = servRiv.CheckIfItemIsThere(model.Name);
+            if (isThere == true)
+            {
+                return View("RiverIsAlreadyIn");
+            }
+
             await servRiv.Add(model);
             return RedirectToAction(nameof(All));
         }

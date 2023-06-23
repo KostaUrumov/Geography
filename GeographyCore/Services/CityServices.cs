@@ -80,9 +80,16 @@ namespace GeographyCore.Services
                 })
                 .ToList();
             return result;
+        }
 
-
-
+        public  bool CheckIfItemIsThere(string name)
+        {
+            var findCity = data.Cities.FirstOrDefaultAsync(x => x.Name == name);
+            if (findCity != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

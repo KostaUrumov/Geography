@@ -34,6 +34,13 @@ namespace Georgaphy.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+
+            bool isThere = countryServ.CheckIfItemIsThere(model.Name);
+            if (isThere == true)
+            {
+                
+                return View("CountryIsAlreadyIn");
+            }
             await countryServ.addCountryAsync(model);
 
             return RedirectToAction ("AllCountries");

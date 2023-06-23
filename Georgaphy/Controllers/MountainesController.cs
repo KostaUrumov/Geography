@@ -36,6 +36,11 @@ namespace Georgaphy.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            bool isThere = montService.CheckIfItemIsThere(model.Name);
+            if (isThere == true)
+            {
+                return View("MountainIsAlreadyIn");
+            }
 
             await montService.Add(model);
             return RedirectToAction(nameof(All));

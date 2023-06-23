@@ -30,7 +30,12 @@ namespace Georgaphy.Controllers
 
         public async Task<IActionResult> Add(AddNewCityModel city)
         {
-            
+            bool IsThere = cityServices.CheckIfItemIsThere(city.Name);
+            if (IsThere == true)
+            {
+                ViewBag.Title = "City is Already in the database";
+                return View("CityIsAlreadyIn");
+            }
             await cityServices.Add(city);
             return RedirectToAction("All");
         }
@@ -59,6 +64,5 @@ namespace Georgaphy.Controllers
             }
             return View(cityServices.AllInGivenContinent(continent));
         }
-
     }
 }

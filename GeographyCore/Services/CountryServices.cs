@@ -53,5 +53,16 @@ namespace GeographyCore.Services
             Country cont = data.Countries.First(x=>x.Name == countryName);
             return cont;
         }
+
+        public bool CheckIfItemIsThere(string name)
+        {
+            var findCountry = data.Countries.FirstOrDefaultAsync(x => x.Name == name);
+            if (findCountry != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

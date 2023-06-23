@@ -10,7 +10,6 @@ namespace GeographyCore.Services
         {
             data = _data;
         }
-
         public List<HomePageContinentViewModel> getAllContinents()
         {
             List<HomePageContinentViewModel> listedContinents = data
