@@ -27,5 +27,7 @@ namespace GeographyCore.ViewModels.CountryModels
         [StringLength(DataConstraints.Country.MaxUrlLength)]
         public string FlagUrl { get; set; } = null!;
 
+        public string GoogleMapsUrl { get; set; } = null!;
+
     }
 }

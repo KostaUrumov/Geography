@@ -51,5 +51,11 @@ namespace Georgaphy.Controllers
             return View(countryServ.ListAllCountries());
         }
 
+        public IActionResult CountryLocation(string location)
+        {
+            
+            return Redirect(location);
+        }
+
     }
 }

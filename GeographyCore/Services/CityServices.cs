@@ -41,7 +41,8 @@ namespace GeographyCore.Services
                   Country = x.Country.Name,
                   Population = x.Population,
                   LandscapePicture = x.LandscapePicture,
-                  Area = x.Area
+                  Area = x.Area,
+                  
               })
               .ToList();
             return result;

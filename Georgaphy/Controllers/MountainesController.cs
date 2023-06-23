@@ -59,7 +59,13 @@ namespace Georgaphy.Controllers
                 return RedirectToAction("All");
             }
 
-            return View(montService.AllInGivenContinent(continent));
+            var list = montService.AllInGivenContinent(continent);
+            if (list.Count() == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(list);
         }
     }
 }

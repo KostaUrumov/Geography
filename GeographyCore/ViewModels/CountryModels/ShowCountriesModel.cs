@@ -11,5 +11,9 @@
         public double Area { get; set; }
 
         public string Continent { get; set; } = null!;
+
+        public string GoogleMapsUrl { get; set; } = null!;
+
+
     }
 }

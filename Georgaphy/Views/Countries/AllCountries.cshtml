@@ -25,6 +25,9 @@
                 <p class="mb-0">Population: @country.Population</p>
                 <p class="mb-0">Land: @country.Area</p>
                 <p>Continent: @country.Continent</p>
+                <form class="input-group-sm" asp-route-location="@country.GoogleMapsUrl" asp-controller="Countries" asp-action="CountryLocation" method="post">
+                    <input type="submit" value="Link to Google Maps" autocomplete="" class="fs-6 btn btn-primary mb-3 p-2" />
+                </form>
             </div>
         </div>
     }

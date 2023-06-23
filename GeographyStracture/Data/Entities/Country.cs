@@ -28,5 +28,7 @@ namespace GeographyStracture.Data.Entities
         [StringLength(DataConstraints.Country.MaxUrlLength)]
         public string FlagUrl { get; set; } = null!;
         public int CapitalCityId { get; set; }
+
+        public string? LocationUrl { get; set; }
     }
 }

@@ -62,7 +62,12 @@ namespace Georgaphy.Controllers
                 return RedirectToAction("All");
             }
 
-            return View(servRiv.AllInGivenContinent(continent));
+            var list = servRiv.AllInGivenContinent(continent);
+            if (list.Count() == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View(list);
         }
     }
 }

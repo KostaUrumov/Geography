@@ -42,7 +42,8 @@ namespace GeographyCore.Services
                     Population = x.Population,
                     Area = x.Area,
                     Name = x.Name,
-                    Continent = x.Continent.Name
+                    Continent = x.Continent.Name,
+                    GoogleMapsUrl = x.LocationUrl
                 })
                 .ToList();
             return listed;
