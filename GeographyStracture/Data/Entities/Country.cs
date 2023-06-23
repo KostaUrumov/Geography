@@ -29,6 +29,7 @@ namespace GeographyStracture.Data.Entities
         public string FlagUrl { get; set; } = null!;
         public int CapitalCityId { get; set; }
 
+        [Required]
         public string? LocationUrl { get; set; }
     }
 }

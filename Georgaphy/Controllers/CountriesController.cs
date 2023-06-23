@@ -38,7 +38,6 @@ namespace Georgaphy.Controllers
             bool isThere = countryServ.CheckIfItemIsThere(model.Name);
             if (isThere == true)
             {
-                
                 return View("CountryIsAlreadyIn");
             }
             await countryServ.addCountryAsync(model);

@@ -38,6 +38,11 @@
                 <span asp-validation-for="FlagUrl" class="text-danger"></span>
             </div>
             <div class="mb-3">
+                <label asp-for="@Model.GoogleMapsUrl" class="form-label">Google Maps Link</label>
+                <input asp-for="@Model.GoogleMapsUrl" class="form-control" value="" />
+                <span asp-validation-for="GoogleMapsUrl" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
                 <label asp-for="@Model.ContinentId" class="form-label">Continent</label>
                 <select asp-for="@Model.ContinentId" class="form-control">
                     @foreach (var genre in Model.Continents)

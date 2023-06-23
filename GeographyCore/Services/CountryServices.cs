@@ -24,7 +24,8 @@ namespace GeographyCore.Services
                 ContinentId = model.ContinentId,
                 Population = model.Population,
                 RoadsKm = model.RoadsKm,
-                FlagUrl = model.FlagUrl
+                FlagUrl = model.FlagUrl,
+                LocationUrl = model.GoogleMapsUrl
             };
 
             await data.Countries.AddAsync(countryNew);
@@ -58,7 +59,7 @@ namespace GeographyCore.Services
         public bool CheckIfItemIsThere(string name)
         {
             var findCountry = data.Countries.FirstOrDefaultAsync(x => x.Name == name);
-            if (findCountry != null)
+            if (findCountry.Result != null)
             {
                 return true;
             }

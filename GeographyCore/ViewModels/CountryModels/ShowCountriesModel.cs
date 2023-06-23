@@ -14,6 +14,5 @@
 
         public string GoogleMapsUrl { get; set; } = null!;
 
-
     }
 }
