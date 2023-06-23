@@ -1,5 +1,6 @@
 ﻿using GeographyCore.Services;
 using GeographyCore.ViewModels.RiverModels;
+using GeographyStracture.Data.Entities;
 using GeorgaphyStracture.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,17 @@ namespace Georgaphy.Controllers
         public IActionResult All()
         {
             return View(servRiv.ListAll());
+        }
+
+        public IActionResult AllInGivenContinent(string continentName)
+        {
+            Continent continent = data.Continents.First(x => x.Name == continentName);
+            if (continent == null)
+            {
+                return RedirectToAction("All");
+            }
+
+            return View(servRiv.AllInGivenContinent(continent));
         }
     }
 }

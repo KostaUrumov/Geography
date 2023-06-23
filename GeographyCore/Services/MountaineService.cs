@@ -46,5 +46,25 @@ namespace GeographyCore.Services
 
             return models;
         }
+
+        public List<AddMounainrViewModel> AllInGivenContinent(Continent continent)
+        {
+            List<AddMounainrViewModel> result = data
+                .Mountines
+                .Where(x=>x.Continent == continent)
+                .Select(x => new AddMounainrViewModel
+                {
+                    Name = x.Name,
+                    ContinentId = x.ContinentId,
+                    CountryId = x.CountryId,
+                    Area = x.Area,
+                    Continent = x.Continent.Name,
+                    Country = x.Country.Name
+
+                })
+                .ToList();
+
+            return result;
+        }
     }
 }

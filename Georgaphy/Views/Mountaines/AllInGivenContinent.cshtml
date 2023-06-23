@@ -1,0 +1,18 @@
+﻿@model List<AddMounainrViewModel>
+
+@{
+    ViewBag.Title = "All Mountines";
+}
+
+<div class="text row">
+    <h2>@ViewBag.Title in @Model[0].Continent</h2>
+    @foreach (var high in Model)
+    {
+        <div class="card-body">
+            <h5 class="card-title mt-1">@high.Name</h5>
+            <p class="mb-0">Land: @high.Area</p>
+            <p>Continent: @high.Continent</p>
+            <p>Country: @high.Country</p>
+        </div>
+    }
+</div>

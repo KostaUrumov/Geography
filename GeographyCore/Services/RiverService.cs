@@ -41,5 +41,22 @@ namespace GeographyCore.Services
             
             return models;
         }
+
+        public List<AddRiverViewModel> AllInGivenContinent(Continent continent)
+        {
+            List<AddRiverViewModel> result = data
+                .Rivers
+                .Where(x=>x.Continent == continent)
+                .Select(c => new AddRiverViewModel
+                {
+                    Name = c.Name,
+                    Length = c.Lenghth,
+                    Continent = c.Continent.Name,
+                    Country = c.Country.Name
+                })
+                .ToList();
+
+            return result;
+        }
     }
 }

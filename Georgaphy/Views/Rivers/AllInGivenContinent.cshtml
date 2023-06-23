@@ -1,0 +1,19 @@
+﻿@model List<AddRiverViewModel>
+
+@{
+    ViewBag.Title = "All Rivers";
+}
+
+<h2>@ViewBag.Title in @Model[0].Continent.ToString()</h2>
+
+<div class="text row">
+    @foreach (var river in Model)
+    {
+        <div class="card-body">
+            <h5 class="card-title mt-1">@river.Name</h5>
+            <p class="mb-0">Length: @river.Length</p>
+            <p>Continent: @river.Continent</p>
+            <p>Country of origin: @river.Country</p>
+        </div>
+    }
+</div>
