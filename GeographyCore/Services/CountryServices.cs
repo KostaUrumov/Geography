@@ -47,5 +47,11 @@ namespace GeographyCore.Services
                 .ToList();
             return listed;
         }
+
+        public Country FindCountry(string countryName)
+        {
+            Country cont = data.Countries.First(x=>x.Name == countryName);
+            return cont;
+        }
     }
 }
