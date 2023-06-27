@@ -11,6 +11,7 @@ builder.Services.AddDbContext<GeographyDb>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+
 builder.Services.AddDefaultIdentity<User>(options =>
 {
     options.Password.RequireDigit = false;
@@ -20,6 +21,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.SignIn.RequireConfirmedAccount = false;
 
 })
+    
     .AddEntityFrameworkStores<GeographyDb>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ContinentService>();
