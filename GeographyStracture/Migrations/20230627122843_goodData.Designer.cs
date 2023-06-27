@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GeorgaphyStructure.Data.Migrations
+namespace GeographyStracture.Migrations
 {
     [DbContext(typeof(GeographyDb))]
-    [Migration("20230619155726_updateNext")]
-    partial class updateNext
+    [Migration("20230627122843_goodData")]
+    partial class goodData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,6 +110,12 @@ namespace GeorgaphyStructure.Data.Migrations
                             Id = 5,
                             Name = "South America",
                             PctureUrl = "https://www.trafalgar.com/media/k1xpowj0/icons-south-america-guided-tour-1.jpg?center=0.5%2C0.5&format=webp&mode=crop&width=900&height=900&quality=80"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Australia",
+                            PctureUrl = "https://www.nationsonline.org/gallery/Australia/Uluru-from-above-L.jpg"
                         });
                 });
 
@@ -135,6 +141,10 @@ namespace GeorgaphyStructure.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("LocationUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -153,34 +163,7 @@ namespace GeorgaphyStructure.Data.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("GeographyStracture.Data.Entities.Mountaine", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -188,24 +171,61 @@ namespace GeorgaphyStructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Area")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ContinentId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("RoleId")
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("ContinentId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("Mountines");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+            modelBuilder.Entity("GeographyStracture.Data.Entities.River", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ContinentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Lenghth")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContinentId");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("Rivers");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -268,6 +288,118 @@ namespace GeorgaphyStructure.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.UserCity", b =>
+                {
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CityId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersCities");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.UserCountry", b =>
+                {
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CountryId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersCountries");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.UserMountain", b =>
+                {
+                    b.Property<int>("MountainId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("MountainId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersMoutains");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.UserRiver", b =>
+                {
+                    b.Property<int>("RiverId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RiverId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersRvers");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -377,6 +509,120 @@ namespace GeorgaphyStructure.Data.Migrations
                     b.Navigation("Continent");
                 });
 
+            modelBuilder.Entity("GeographyStracture.Data.Entities.Mountaine", b =>
+                {
+                    b.HasOne("GeographyStracture.Data.Entities.Continent", "Continent")
+                        .WithMany()
+                        .HasForeignKey("ContinentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GeographyStracture.Data.Entities.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Continent");
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.River", b =>
+                {
+                    b.HasOne("GeographyStracture.Data.Entities.Continent", "Continent")
+                        .WithMany()
+                        .HasForeignKey("ContinentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GeographyStracture.Data.Entities.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Continent");
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.UserCity", b =>
+                {
+                    b.HasOne("GeographyStracture.Data.Entities.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GeographyStracture.Data.Entities.User", "User")
+                        .WithMany("UsersCities")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.UserCountry", b =>
+                {
+                    b.HasOne("GeographyStracture.Data.Entities.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GeographyStracture.Data.Entities.User", "User")
+                        .WithMany("UsersCountries")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.UserMountain", b =>
+                {
+                    b.HasOne("GeographyStracture.Data.Entities.Mountaine", "Mountain")
+                        .WithMany()
+                        .HasForeignKey("MountainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GeographyStracture.Data.Entities.User", "User")
+                        .WithMany("UsersMountains")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Mountain");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.UserRiver", b =>
+                {
+                    b.HasOne("GeographyStracture.Data.Entities.River", "River")
+                        .WithMany()
+                        .HasForeignKey("RiverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GeographyStracture.Data.Entities.User", "User")
+                        .WithMany("UsersRvers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("River");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -388,7 +634,7 @@ namespace GeorgaphyStructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("GeographyStracture.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -397,7 +643,7 @@ namespace GeorgaphyStructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("GeographyStracture.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -412,7 +658,7 @@ namespace GeorgaphyStructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("GeographyStracture.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -421,11 +667,22 @@ namespace GeorgaphyStructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("GeographyStracture.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GeographyStracture.Data.Entities.User", b =>
+                {
+                    b.Navigation("UsersCities");
+
+                    b.Navigation("UsersCountries");
+
+                    b.Navigation("UsersMountains");
+
+                    b.Navigation("UsersRvers");
                 });
 #pragma warning restore 612, 618
         }

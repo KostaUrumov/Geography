@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GeographyStracture.Data.Entities
 {
-    public  class Country
+    public class Country
     {
         public int Id { get; set; }
 
@@ -30,6 +30,6 @@ namespace GeographyStracture.Data.Entities
         public int CapitalCityId { get; set; }
 
         [Required]
-        public string? LocationUrl { get; set; }
+        public string LocationUrl { get; set; }
     }
 }

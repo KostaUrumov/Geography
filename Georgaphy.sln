@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Georgaphy", "Georgaphy\Geor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeographyStracture", "GeographyStracture\GeographyStracture.csproj", "{7A25B45A-D4B1-4CBD-8898-7C4D9BAAAB58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeographyCore", "GeographyCore\GeographyCore.csproj", "{37A2394C-CE0A-4567-A6B8-E7D129B5F061}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeographyCore", "GeographyCore\GeographyCore.csproj", "{37A2394C-CE0A-4567-A6B8-E7D129B5F061}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
