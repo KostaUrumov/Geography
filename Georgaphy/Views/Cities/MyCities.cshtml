@@ -1,0 +1,23 @@
+﻿@model List<AddNewCityModel>
+
+@{
+    ViewBag.Title = "Visited Cities";
+}
+
+<div class="text-center row">
+    <h2>All visited cities</h2>
+    @foreach (var city in Model)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@city.LandscapePicture" alt="Flag">
+            <div class="card-body">
+
+                <h5 class="card-title mt-1"> @city.Name</h5>
+                <p class="mb-0">Population: @city.Population</p>
+                <p class="mb-0">Land: @city.Area</p>
+                <p>Country: @city.Country</p>
+            </div>
+        </div>
+    }
+</div>

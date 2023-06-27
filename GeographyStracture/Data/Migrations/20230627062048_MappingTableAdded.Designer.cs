@@ -4,6 +4,7 @@ using GeorgaphyStracture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeorgaphyStructure.Data.Migrations
 {
     [DbContext(typeof(GeographyDb))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230627062048_MappingTableAdded")]
+    partial class MappingTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,51 +305,6 @@ namespace GeorgaphyStructure.Data.Migrations
                     b.ToTable("UsersCities");
                 });
 
-            modelBuilder.Entity("GeographyStracture.Data.Entities.UserCountry", b =>
-                {
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CountryId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UsersCountries");
-                });
-
-            modelBuilder.Entity("GeographyStracture.Data.Entities.UserMountain", b =>
-                {
-                    b.Property<int>("MountainId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MountainId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UsersMoutains");
-                });
-
-            modelBuilder.Entity("GeographyStracture.Data.Entities.UserRiver", b =>
-                {
-                    b.Property<int>("RiverId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("RiverId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UsersRvers");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -564,63 +521,6 @@ namespace GeorgaphyStructure.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("GeographyStracture.Data.Entities.UserCountry", b =>
-                {
-                    b.HasOne("GeographyStracture.Data.Entities.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GeographyStracture.Data.Entities.User", "User")
-                        .WithMany("UsersCountries")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("GeographyStracture.Data.Entities.UserMountain", b =>
-                {
-                    b.HasOne("GeographyStracture.Data.Entities.Mountaine", "Mountain")
-                        .WithMany()
-                        .HasForeignKey("MountainId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GeographyStracture.Data.Entities.User", "User")
-                        .WithMany("UsersMountains")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Mountain");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("GeographyStracture.Data.Entities.UserRiver", b =>
-                {
-                    b.HasOne("GeographyStracture.Data.Entities.River", "River")
-                        .WithMany()
-                        .HasForeignKey("RiverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GeographyStracture.Data.Entities.User", "User")
-                        .WithMany("UsersRvers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("River");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -675,12 +575,6 @@ namespace GeorgaphyStructure.Data.Migrations
             modelBuilder.Entity("GeographyStracture.Data.Entities.User", b =>
                 {
                     b.Navigation("UsersCities");
-
-                    b.Navigation("UsersCountries");
-
-                    b.Navigation("UsersMountains");
-
-                    b.Navigation("UsersRvers");
                 });
 #pragma warning restore 612, 618
         }

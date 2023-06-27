@@ -77,5 +77,33 @@ namespace GeographyCore.Services
             }
             return false;
         }
+
+        public async Task VisitThisPlace(string userId, string montName)
+        {
+            var mountan = data.Mountines.First(m => m.Name == montName);
+            UserMountain uMont = new UserMountain()
+            {
+                MountainId = mountan.Id,
+                UserId = userId
+            };
+            await data.UsersMoutains.AddAsync(uMont);
+            await data.SaveChangesAsync();
+        }
+
+        public List<AddMounainrViewModel> MyVisits(string userId)
+        {
+            List<AddMounainrViewModel> result = data
+                .UsersMoutains
+                .Where(u => u.UserId == userId)
+                .Select(f => new AddMounainrViewModel
+                {
+                    Name = f.Mountain.Name,
+                    Continent = f.Mountain.Continent.Name,
+                    Country = f.Mountain.Country.Name,
+                    Area = f.Mountain.Area
+                })
+                .ToList();
+            return result;
+        }
     }
 }

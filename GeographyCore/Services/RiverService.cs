@@ -69,5 +69,34 @@ namespace GeographyCore.Services
             }
             return false;
         }
+
+        public async Task VisitThisRiver(string userId, string riverName)
+        {
+            var river = data.Rivers.First(r => r.Name == riverName);
+            UserRiver uRiv = new UserRiver()
+            {
+                RiverId = river.Id,
+                UserId = userId
+            };
+            await data.UsersRvers.AddAsync(uRiv);
+            await data.SaveChangesAsync();
+
+        }
+
+        public List<AddRiverViewModel> MyRivers(string userId)
+        {
+            List<AddRiverViewModel> models = data
+                .UsersRvers
+                .Where(u => u.UserId == userId)
+                .Select(s => new AddRiverViewModel
+                {
+                    Name = s.River.Name,
+                    Length = s.River.Lenghth,
+                    Continent = s.River.Continent.Name,
+                    Country = s.River.Country.Name
+                })
+                .ToList();
+            return models;
+        }
     }
 }

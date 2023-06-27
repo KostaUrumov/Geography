@@ -17,6 +17,9 @@
             <p class="mb-0">Land: @high.Area</p>
             <p>Continent: @high.Continent</p>
             <p>Country: @high.Country</p>
+            <form class="input-group-sm" asp-route-mountainName="@high.Name" asp-controller="Mountaines" asp-action="VisitMountain" method="post">
+                <input type="submit" value="Visited this Mountine" class="fs-6 btn btn-warning mb-3 p-2" />
+            </form>
         </div>
     }
 </div>

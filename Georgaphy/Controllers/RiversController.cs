@@ -4,6 +4,7 @@ using GeographyStracture.Data.Entities;
 using GeorgaphyStracture.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Georgaphy.Controllers
 {
@@ -68,6 +69,29 @@ namespace Georgaphy.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(list);
+        }
+
+        public async Task<IActionResult> VisitRiver(string riverName)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (userId != null)
+            {
+                await servRiv.VisitThisRiver(userId, riverName);
+                return RedirectToAction(nameof(MyRivers));
+            }
+
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        public IActionResult MyRivers()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (userId != null)
+            {
+                return View(servRiv.MyRivers(userId));
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

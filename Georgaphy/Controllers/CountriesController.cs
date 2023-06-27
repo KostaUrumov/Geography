@@ -3,6 +3,7 @@ using GeographyCore.ViewModels.CountryModels;
 using GeorgaphyStracture.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Georgaphy.Controllers
 {
@@ -54,6 +55,29 @@ namespace Georgaphy.Controllers
         {
             
             return Redirect(location);
+        }
+
+        public IActionResult MyCountries()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (userId != null)
+            {
+                return View(countryServ.MyVisits(userId));
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> VisitCountry(string countryName)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (userId != null)
+            {
+                await countryServ.VistThisCountry(userId, countryName);
+                return RedirectToAction(nameof(MyCountries));
+            }
+
+            return RedirectToAction("Index", "Home");
+
         }
 
     }

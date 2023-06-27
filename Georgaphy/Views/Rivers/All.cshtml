@@ -16,6 +16,9 @@
             <p class="mb-0">Length: @river.Length</p>
             <p>Continent: @river.Continent</p>
             <p>Country of origin: @river.Country</p>
+            <form class="input-group-sm" asp-route-riverName="@river.Name" asp-controller="Rivers" asp-action="VisitRiver" method="post">
+                <input type="submit" value="Visited this River" class="fs-6 btn btn-primary mb-3 p-2" />
+            </form>
         </div>
     }
 </div>

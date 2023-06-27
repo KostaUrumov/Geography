@@ -24,6 +24,9 @@
                 <p class="mb-0">Population: @city.Population</p>
                 <p class="mb-0">Land: @city.Area</p>
                 <p>Country: @city.Country</p>
+                <form class="input-group-sm" asp-route-cityName="@city.Name" asp-controller="Cities" asp-action="VisitCity" method="post">
+                <input type="submit" value="Visited this City" class="fs-6 btn btn-success mb-3 p-2" />
+            </form>
             </div>
         </div>
     }

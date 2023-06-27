@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeorgaphyStracture.Data
 {
-    public class GeographyDb : IdentityDbContext
+    public class GeographyDb : IdentityDbContext<User>
     {
         public GeographyDb(DbContextOptions<GeographyDb> options)
             : base(options)
@@ -17,7 +17,18 @@ namespace GeorgaphyStracture.Data
             builder.Entity<Continent>()
                 .HasData(seedContinents());
 
-            
+            builder.Entity<UserCity>()
+                .HasKey(a => new { a.CityId, a.UserId });
+
+            builder.Entity<UserCountry>()
+                .HasKey(a => new { a.CountryId, a.UserId });
+
+            builder.Entity<UserMountain>()
+                .HasKey(a => new { a.MountainId, a.UserId });
+
+            builder.Entity<UserRiver>()
+               .HasKey(a => new { a.RiverId, a.UserId });
+
             base.OnModelCreating(builder);
         }
 
@@ -26,6 +37,10 @@ namespace GeorgaphyStracture.Data
         public DbSet<Country> Countries { get; set; } = null!;
         public DbSet<River> Rivers { get; set; } = null!;
         public DbSet<Mountaine> Mountines { get; set; } = null!;
+        public DbSet<UserCity> UsersCities { get; set; } = null!;
+        public DbSet<UserCountry> UsersCountries { get; set; } = null!;
+        public DbSet<UserMountain> UsersMoutains { get; set; } = null!;
+        public DbSet<UserRiver> UsersRvers { get; set; } = null!;
 
         private List<Continent> seedContinents()
         {

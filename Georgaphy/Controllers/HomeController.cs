@@ -18,6 +18,11 @@ namespace Georgaphy.Controllers
             return View(continent.getAllContinents());
         }
 
+        public IActionResult Mine()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

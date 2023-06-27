@@ -83,7 +83,7 @@ namespace GeographyCore.Services
             return result;
         }
 
-        public  bool CheckIfItemIsThere(string name)
+        public bool CheckIfItemIsThere(string name)
         {
             var findCity = data.Cities.FirstOrDefaultAsync(x => x.Name == name);
             if (findCity != null)
@@ -91,6 +91,37 @@ namespace GeographyCore.Services
                 return true;
             }
             return false;
+        }
+
+        public async Task VisitCity(string userId, string cityName)
+        {
+            var city = data.Cities.First(x => x.Name == cityName);
+
+            UserCity userCity = new UserCity()
+            {
+                UserId = userId,
+                CityId = city.Id
+            };
+
+            await data.UsersCities.AddAsync(userCity);
+            await data.SaveChangesAsync();
+        }
+
+        public List<AddNewCityModel> MyVisits(string userId)
+        {
+            List<AddNewCityModel> models = data
+                .UsersCities
+                .Where(u => u.UserId == userId)
+                .Select(c => new AddNewCityModel
+                {
+                    Name = c.City.Name,
+                    Country = c.City.Country.Name,
+                    Population = c.City.Population,
+                    LandscapePicture = c.City.LandscapePicture,
+                    Area = c.City.Area
+                })
+                .ToList();
+            return models;
         }
     }
 }

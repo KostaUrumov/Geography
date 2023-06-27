@@ -66,5 +66,35 @@ namespace GeographyCore.Services
             return false;
         }
 
+        public async Task VistThisCountry(string userId, string countryName)
+        {
+            var country = data.Countries.First(x => x.Name == countryName);
+
+            UserCountry uCou = new UserCountry()
+            {
+                UserId = userId,
+                CountryId = country.Id
+            };
+            await data.UsersCountries.AddAsync(uCou);
+            await data.SaveChangesAsync();
+        }
+        public List<ShowCountriesModel> MyVisits(string userId)
+        {
+            List<ShowCountriesModel> listed = data
+                .UsersCountries
+                .Where(u => u.UserId == userId)
+                .Select(c => new ShowCountriesModel()
+                {
+                    Flag = c.Country.FlagUrl,
+                    Population = c.Country.Population,
+                    Area = c.Country.Area,
+                    Name = c.Country.Name,
+                    Continent = c.Country.Continent.Name,
+                    GoogleMapsUrl = c.Country.LocationUrl
+                })
+                .ToList();
+            return listed;
+        }
+
     }
 }
