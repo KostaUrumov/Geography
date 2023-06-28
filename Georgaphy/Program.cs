@@ -31,6 +31,7 @@ builder.Services.AddScoped<CountryServices>();
 builder.Services.AddScoped<CityServices>();
 builder.Services.AddScoped<MountaineService>();
 builder.Services.AddScoped<RiverService>();
+builder.Services.AddScoped<RegisterService>();
 
 builder.Services.AddAuthorization(options =>
 {
