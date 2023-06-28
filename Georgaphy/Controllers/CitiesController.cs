@@ -20,6 +20,7 @@ namespace Georgaphy.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AdminsOnly")]
         public IActionResult Add()
         {
             var model = new AddNewCityModel()

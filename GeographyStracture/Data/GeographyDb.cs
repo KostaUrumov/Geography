@@ -19,7 +19,7 @@ namespace GeorgaphyStracture.Data
                 .HasData(
                 new IdentityRole {Id = "2c5e174e-3b0e-446f-86af-483d56fd7210", Name = "Administrator", NormalizedName = "ADMINISTRATOR".ToUpper() },
                 new IdentityRole { Id = "2c93174e-3b0e-446f-86af-883d56fr7210", Name = "User", NormalizedName = "USER".ToUpper() },
-                new IdentityRole { Id = "3j99004e-3b0e-446f-86af-073p96de6410", Name = "Admn", NormalizedName = "ADMIN".ToUpper() }) ;
+                new IdentityRole { Id = "3j99004e-3b0e-446f-86af-073p96de6410", Name = "Admin", NormalizedName = "ADMIN".ToUpper() }) ;
 
             builder.Entity<Continent>()
                 .HasData(seedContinents());

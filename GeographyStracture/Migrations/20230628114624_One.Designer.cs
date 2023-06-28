@@ -4,6 +4,7 @@ using GeorgaphyStracture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeographyStracture.Migrations
 {
     [DbContext(typeof(GeographyDb))]
-    partial class GeographyDbModelSnapshot : ModelSnapshot
+    [Migration("20230628114624_One")]
+    partial class One
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -378,22 +380,22 @@ namespace GeographyStracture.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "c0f45c4e-0786-4396-b921-dd970ca8e1b2",
+                            ConcurrencyStamp = "3b110ea7-28a5-481b-9fb5-e7d991788d45",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "2c93174e-3b0e-446f-86af-883d56fr7210",
-                            ConcurrencyStamp = "de3969d3-7931-4b91-beaf-3aab8d55bfd6",
+                            ConcurrencyStamp = "42ef6884-fb4a-4f5b-bf7d-def7e66ebc2b",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "3j99004e-3b0e-446f-86af-073p96de6410",
-                            ConcurrencyStamp = "48d35c9b-eb98-448a-8dfe-9f3ca1789672",
-                            Name = "Admin",
+                            ConcurrencyStamp = "13a300f5-d624-479d-ba43-9b3ad8ff1547",
+                            Name = "Admn",
                             NormalizedName = "ADMIN"
                         });
                 });

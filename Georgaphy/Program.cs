@@ -32,6 +32,11 @@ builder.Services.AddScoped<CityServices>();
 builder.Services.AddScoped<MountaineService>();
 builder.Services.AddScoped<RiverService>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminsOnly", policy => policy.RequireRole("Admin"));
+});
+
 var app = builder.Build();
 
 
