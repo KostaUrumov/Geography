@@ -1,6 +1,7 @@
 using GeographyCore.Services;
 using GeographyStracture.Data.Entities;
 using GeorgaphyStracture.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +22,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.SignIn.RequireConfirmedAccount = false;
 
 })
-    
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<GeographyDb>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ContinentService>();

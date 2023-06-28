@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeographyStracture.Migrations
 {
     [DbContext(typeof(GeographyDb))]
-    [Migration("20230627122843_goodData")]
-    partial class goodData
+    [Migration("20230628061521_firstMigraton")]
+    partial class firstMigraton
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -375,6 +375,29 @@ namespace GeographyStracture.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+                            ConcurrencyStamp = "3d640e70-d215-4e12-ac1e-f0da85954d6f",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "2c93174e-3b0e-446f-86af-883d56fr7210",
+                            ConcurrencyStamp = "fe4f7d58-8bfe-4f86-8d17-f091aec99cb1",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "3j99004e-3b0e-446f-86af-073p96de6410",
+                            ConcurrencyStamp = "556cb9fe-41ae-46a3-801a-f5a8994b1f6a",
+                            Name = "Admn",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

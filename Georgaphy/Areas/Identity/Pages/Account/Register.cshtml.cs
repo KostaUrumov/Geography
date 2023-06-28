@@ -22,11 +22,11 @@ namespace Georgaphy.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly RoleManager<User> _roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<User> userManager,
-            RoleManager<User> roleManager,
+            RoleManager<IdentityRole> roleManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
@@ -117,12 +117,20 @@ namespace Georgaphy.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.username, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                
 
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                    if (await _roleManager.RoleExistsAsync("User"))
+                    {
+                        await _userManager.AddToRoleAsync(user, "User");
+                    }
+                    if (user.UserName == "kostadin" && await _roleManager.RoleExistsAsync("Admin"))
+                    {
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    }
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     
