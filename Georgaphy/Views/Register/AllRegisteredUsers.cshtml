@@ -5,6 +5,14 @@
     ViewBag.Title = "All registered users";
 }
 
+<div class="text-center"><h4>@ViewBag.Title</h4></div>
+
+<style>
+    body {
+        color: mediumslateblue;
+    }
+</style>
+
 @for (int i = 0; i < Model.Count; i++)
 {
     int one = i;
@@ -14,16 +22,16 @@
         {
 
             <tr>
+                <th scope="col">#</th>
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
             </tr>
-
         }
 
         <tr>
             <th scope="row">@(one+1)</th>
-            <td>@Model[i].Id</td>
-            <td>@Model[i].Name</td>
+            <th scope="row">@Model[i].Id</th>
+            <th scope="row">@Model[i].Name</th>
         </tr>
 
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Georgaphy.Controllers
 {
+    [Authorize(Policy = "AdminsOnly")]
     public class RegisterController : Controller
     {
         private readonly RegisterService regServ;
@@ -17,6 +18,16 @@ namespace Georgaphy.Controllers
         public IActionResult AllRegisteredUsers()
         {
             return View(regServ.GetAllRegistered());
+        }
+        [HttpGet]
+        public  IActionResult ChangeRole(string userId)
+        {
+            var user = regServ.FindUser(userId);
+
+            user.Roles.Add("Admin");
+            user.Roles.Add("User");
+
+            return View(user);
         }
     }
 }

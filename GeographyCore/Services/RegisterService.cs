@@ -1,4 +1,5 @@
 ﻿using GeographyCore.ViewModels.RegisterModels;
+using GeographyStracture.Data.Entities;
 using GeorgaphyStracture.Data;
 
 namespace GeographyCore.Services
@@ -24,6 +25,22 @@ namespace GeographyCore.Services
             
             return result;
         }
+
+        public People FindUser(string userId)
+        {
+            var mar = data.Users.First(u => u.Id == userId);
+            
+            People person = new People()
+            {
+                Name = mar.UserName,
+                Id = mar.Id,
+               
+            };
+            return person;
+
+        }
+
+        
 
     }
 }
