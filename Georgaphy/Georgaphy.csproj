@@ -32,11 +32,4 @@
     <ProjectReference Include="..\GeographyStracture\GeographyStracture.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Administration\Controllers\" />
-    <Folder Include="Areas\Administration\Data\" />
-    <Folder Include="Areas\Administration\Models\" />
-    <Folder Include="Areas\Administration\Views\" />
-  </ItemGroup>
-
 </Project>

@@ -1,6 +1,7 @@
 using GeographyCore.Services;
 using GeographyStracture.Data.Entities;
 using GeorgaphyStracture.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -60,19 +61,19 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapDefaultControllerRoute();
-
-app.MapControllerRoute(
+app.UseEndpoints(endpoints =>
+{
+    app.MapControllerRoute(
       name: "default",
       pattern: "{controller=Home}/{action=Index}/{id?}"
-
     );
-
-app.MapControllerRoute(
-      name: "Adminstration",
+    app.MapControllerRoute(
+      name: "areas",
       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-
     );
+
+});
+
 
 app.MapRazorPages();
 
