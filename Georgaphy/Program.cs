@@ -33,12 +33,6 @@ builder.Services.AddScoped<MountaineService>();
 builder.Services.AddScoped<RiverService>();
 builder.Services.AddScoped<RegisterService>();
 
-builder.Services.AddAuthentication()
-    .AddGoogle(googleOptions =>
-    {
-        googleOptions. ClientId = "463323973575-j4d5aqcp0fetfmngeo9gfun37eudm43u.apps.googleusercontent.com";
-        googleOptions.ClientSecret = "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";
-    });
 
 builder.Services.AddAuthorization(options =>
 {
