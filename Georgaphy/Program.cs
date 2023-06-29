@@ -1,4 +1,3 @@
-using GeographyCore.Contracts;
 using GeographyCore.Services;
 using GeographyStracture.Data.Entities;
 using GeorgaphyStracture.Data;
@@ -25,6 +24,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<GeographyDb>();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ContinentService>();
 builder.Services.AddScoped<CountryServices>();
@@ -60,6 +60,19 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapDefaultControllerRoute();
+
+app.MapControllerRoute(
+      name: "default",
+      pattern: "{controller=Home}/{action=Index}/{id?}"
+
+    );
+
+app.MapControllerRoute(
+      name: "Adminstration",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+
+    );
+
 app.MapRazorPages();
 
 app.Run();

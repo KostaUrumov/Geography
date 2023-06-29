@@ -86,7 +86,7 @@ namespace GeographyCore.Services
         public bool CheckIfItemIsThere(string name)
         {
             var findCity = data.Cities.FirstOrDefaultAsync(x => x.Name == name);
-            if (findCity != null)
+            if (findCity.Result != null)
             {
                 return true;
             }

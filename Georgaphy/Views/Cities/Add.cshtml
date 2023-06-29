@@ -11,51 +11,53 @@
 
 @if (Model.Countries.Count() == 0)
 {
-    <h3>Can Not add a City. There are no Coutries in our Database!
-        Please add a Country first</h3>
+    <h3>
+        Can Not add a City. There are no Coutries in our Database!
+        Please add a Country first
+    </h3>
 }
 else
 {
 
-<div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
-            <div class="mb-3">
-                <label asp-for="@Model.Name" class="form-label">Name of the city</label>
-                <input asp-for="@Model.Name" class="form-control" aria-required="true" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Area" class="form-label">Area in km2</label>
-                <input asp-for="@Model.Area" class="form-control" aria-required="true" />
-                <span asp-validation-for="Area" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.Population" class="form-label">Population in millions</label>
-                <input asp-for="@Model.Population" class="form-control" aria-required="true" />
-                <span asp-validation-for="Population" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.LandscapePicture" class="form-label">Landscape (Url Link)</label>
-                <input asp-for="@Model.LandscapePicture" class="form-control" value="" />
-                <span asp-validation-for="LandscapePicture" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.CountryId" class="form-label">Country</label>
-                <select asp-for="@Model.CountryId" class="form-control">
-                    @foreach (var genre in Model.Countries)
-                    {
-                        <option value="@genre.Id">@genre.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="CountryId" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value="Add" />
-            </div>
-        </form>
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+            <form method="post">
+                <div class="mb-3">
+                    <label asp-for="@Model.Name" class="form-label">Name of the city</label>
+                    <input asp-for="@Model.Name" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Area" class="form-label">Area in km2</label>
+                    <input asp-for="@Model.Area" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Area" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Population" class="form-label">Population in millions</label>
+                    <input asp-for="@Model.Population" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Population" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.LandscapePicture" class="form-label">Landscape (Url Link)</label>
+                    <input asp-for="@Model.LandscapePicture" class="form-control" value="" />
+                    <span asp-validation-for="LandscapePicture" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.CountryId" class="form-label">Country</label>
+                    <select asp-for="@Model.CountryId" class="form-control">
+                        @foreach (var genre in Model.Countries)
+                        {
+                            <option value="@genre.Id">@genre.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <input class="btn btn-primary" type="submit" value="Add" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 }
 
 

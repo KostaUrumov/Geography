@@ -3,10 +3,12 @@
 @{
     ViewBag.Title = "All Cities";
 }
-
-<div class="text-center">
-    <a class="navbar-brand" asp-area="" asp-controller="Cities" asp-action="Add"><h5>Add new City</h5></a>
-</div>
+@if (this.User.IsInRole("Admin"))
+{
+    <div class="text-center">
+        <a class="navbar-brand" asp-area="" asp-controller="Cities" asp-action="Add"><h5>Add new City</h5></a>
+    </div>
+}
 
 <div class="text-center">
     <h2>@ViewBag.Title</h2>

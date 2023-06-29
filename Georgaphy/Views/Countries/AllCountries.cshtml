@@ -5,10 +5,13 @@
     ViewBag.Title = "All Countries";
 }
 
+@if (this.User.IsInRole("Admin"))
+{
 
-<div class="text-center">
-    <a class="navbar-brand" asp-area="" asp-controller="Countries" asp-action="AddCountry"><h5>Add new Country</h5></a>
-</div>
+    <div class="text-center">
+        <a class="navbar-brand" asp-area="" asp-controller="Countries" asp-action="AddCountry"><h5>Add new Country</h5></a>
+    </div>
+}
 <div class="text-center">
     <h2>@ViewBag.Title</h2>
 </div>

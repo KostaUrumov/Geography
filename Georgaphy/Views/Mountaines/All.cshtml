@@ -4,9 +4,12 @@
     ViewBag.Title = "All Mountines";
 }
 
-<div class="text-center">
-    <a class="navbar-brand" asp-area="" asp-controller="Mountaines" asp-action="Add"><h5>Add new Mountine</h5></a>
-</div>
+@if (this.User.IsInRole("Admin"))
+{
+    <div class="text-center">
+        <a class="navbar-brand" asp-area="" asp-controller="Mountaines" asp-action="Add"><h5>Add new Mountine</h5></a>
+    </div>
+}
 <div class="text-center">
     <h2>@ViewBag.Title</h2>
 </div>
