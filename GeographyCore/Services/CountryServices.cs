@@ -96,5 +96,23 @@ namespace GeographyCore.Services
             return listed;
         }
 
+        public bool IfUserWasThere(string userId, string countryName)
+        {
+            var country = data.Countries.First(x => x.Name == countryName);
+
+            UserCountry uCou = new UserCountry()
+            {
+                UserId = userId,
+                CountryId = country.Id
+            };
+            bool wasThere = data.UsersCountries.Contains(uCou);
+            if (wasThere == false)
+            {
+                return false;
+            }
+            return true;
+
+        }
+
     }
 }

@@ -71,7 +71,7 @@ namespace GeographyCore.Services
         public bool CheckIfItemIsThere(string name)
         {
             var findMountaine = data.Mountines.FirstOrDefaultAsync(x => x.Name == name);
-            if (findMountaine != null)
+            if (findMountaine.Result != null)
             {
                 return true;
             }
@@ -104,6 +104,23 @@ namespace GeographyCore.Services
                 })
                 .ToList();
             return result;
+        }
+
+        public bool IfUserWasThere(string userId, string montName)
+        {
+            var mountan = data.Mountines.First(m => m.Name == montName);
+            UserMountain uMont = new UserMountain()
+            {
+                MountainId = mountan.Id,
+                UserId = userId
+            };
+            bool wasThere = data.UsersMoutains.Contains(uMont);
+            if (wasThere == false)
+            {
+                return false;
+            }
+            return true;
+
         }
     }
 }

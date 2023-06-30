@@ -68,7 +68,7 @@ app.UseEndpoints(endpoints =>
       pattern: "{controller=Home}/{action=Index}/{id?}"
     );
     app.MapControllerRoute(
-      name: "areas",
+      name: "Admin",
       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 

@@ -21,6 +21,7 @@ namespace Georgaphy.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AdminsOnly")]
         public IActionResult Add()
         {
             AddMounainrViewModel model = new AddMounainrViewModel()
@@ -82,12 +83,19 @@ namespace Georgaphy.Controllers
         public async Task<IActionResult> VisitMountain(string mountainName)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (userId != null)
+            bool wasThere = montService.IfUserWasThere(userId, mountainName);
+            if (wasThere == true)
             {
-                await montService.VisitThisPlace(userId, mountainName);
-                return RedirectToAction(nameof(MyMountains));
+                return RedirectToAction("Index", "Home");
             }
-
+            else
+            {
+                if (userId != null)
+                {
+                    await montService.VisitThisPlace(userId, mountainName);
+                    return RedirectToAction("MyMountains");
+                }
+            }
             return RedirectToAction("Index", "Home");
 
         }

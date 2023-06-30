@@ -1,5 +1,6 @@
 ﻿using GeographyCore.Services;
 using Georgaphy.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -19,6 +20,12 @@ namespace Georgaphy.Controllers
         }
 
         public IActionResult Mine()
+        {
+            return View();
+        }
+
+        [Authorize(Policy = "AdminsOnly")]
+        public IActionResult AddData()
         {
             return View();
         }

@@ -19,6 +19,7 @@ namespace Georgaphy.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AdminsOnly")]
         public IActionResult AddCountry()
         {
             var country = new AddCountryViewModel()
@@ -70,10 +71,18 @@ namespace Georgaphy.Controllers
         public async Task<IActionResult> VisitCountry(string countryName)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (userId != null)
+            bool wasThere = countryServ.IfUserWasThere(userId, countryName);
+            if (wasThere == true)
             {
-                await countryServ.VistThisCountry(userId, countryName);
-                return RedirectToAction(nameof(MyCountries));
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                if (userId != null)
+                {
+                    await countryServ.VistThisCountry(userId, countryName);
+                    return RedirectToAction(nameof(MyCountries));
+                }
             }
 
             return RedirectToAction("Index", "Home");

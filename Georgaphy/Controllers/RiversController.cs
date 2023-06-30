@@ -21,6 +21,7 @@ namespace Georgaphy.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AdminsOnly")]
         public IActionResult Add()
         {
             var model = new AddRiverViewModel
@@ -74,12 +75,19 @@ namespace Georgaphy.Controllers
         public async Task<IActionResult> VisitRiver(string riverName)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (userId != null)
+            bool wasThere = servRiv.IfUserWasThere(userId, riverName);
+            if (wasThere == true)
             {
-                await servRiv.VisitThisRiver(userId, riverName);
-                return RedirectToAction(nameof(MyRivers));
+                return RedirectToAction("Index", "Home");
             }
-
+            else
+            {
+                if (userId != null)
+                {
+                    await servRiv.VisitThisRiver(userId, riverName);
+                    return RedirectToAction(nameof(MyRivers));
+                }
+            }
             return RedirectToAction("Index", "Home");
 
         }
@@ -87,6 +95,7 @@ namespace Georgaphy.Controllers
         public IActionResult MyRivers()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
             if (userId != null)
             {
                 return View(servRiv.MyRivers(userId));

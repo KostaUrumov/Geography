@@ -63,7 +63,7 @@ namespace GeographyCore.Services
         public bool CheckIfItemIsThere(string name)
         {
             var findRiver = data.Rivers.FirstOrDefaultAsync(x => x.Name == name);
-            if (findRiver != null)
+            if (findRiver.Result != null)
             {
                 return true;
             }
@@ -97,6 +97,23 @@ namespace GeographyCore.Services
                 })
                 .ToList();
             return models;
+        }
+
+        public bool IfUserWasThere(string userId, string riverName)
+        {
+            var river = data.Rivers.First(r => r.Name == riverName);
+            UserRiver uRiv = new UserRiver()
+            {
+                RiverId = river.Id,
+                UserId = userId
+            };
+            bool wasThere = data.UsersRvers.Contains(uRiv);
+            if (wasThere == false)
+            {
+                return false;
+            }
+            return true;
+
         }
     }
 }

@@ -19,6 +19,11 @@ namespace Georgaphy.Controllers
             data = _data;
         }
 
+        public IActionResult All()
+        {
+            return View(cityServices.ListAll());
+        }
+
         [HttpGet]
         [Authorize(Policy = "AdminsOnly")]
         public IActionResult Add()
@@ -41,12 +46,6 @@ namespace Georgaphy.Controllers
             await cityServices.Add(city);
             return RedirectToAction("All");
         }
-
-        public IActionResult All()
-        {
-            return View(cityServices.ListAll());
-        }
-
         public IActionResult AllInGivenCountry(string countryName)
         {
             Country country = data.Countries.First(x => x.Name == countryName);
@@ -76,10 +75,18 @@ namespace Georgaphy.Controllers
         public async Task<IActionResult> VisitCity(string cityName)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (userId != null)
+            bool wasThere = cityServices.IfUserWasThere(userId, cityName);
+            if (wasThere == true)
             {
-                await cityServices.VisitCity(userId, cityName);
-                return RedirectToAction(nameof(MyCities));
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                if (userId != null)
+                {
+                    await cityServices.VisitCity(userId, cityName);
+                    return RedirectToAction(nameof(MyCities));
+                }
             }
             return RedirectToAction("Index", "Home");
         }

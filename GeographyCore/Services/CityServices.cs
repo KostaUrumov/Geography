@@ -3,6 +3,7 @@ using GeographyCore.ViewModels.CityModels;
 using GeographyStracture.Data.Entities;
 using GeorgaphyStracture.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace GeographyCore.Services
 {
@@ -95,6 +96,7 @@ namespace GeographyCore.Services
 
         public async Task VisitCity(string userId, string cityName)
         {
+
             var city = data.Cities.First(x => x.Name == cityName);
 
             UserCity userCity = new UserCity()
@@ -122,6 +124,23 @@ namespace GeographyCore.Services
                 })
                 .ToList();
             return models;
+        }
+
+        public bool IfUserWasThere(string userId, string city)
+        {
+            var findCity = data.Cities.First(x => x.Name == city);
+
+            UserCity userCity = new UserCity()
+            {
+                UserId = userId,
+                CityId = findCity.Id
+            };
+            bool wasThere = data.UsersCities.Contains(userCity);
+            if (wasThere == false)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
