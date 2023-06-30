@@ -6,5 +6,7 @@
         public List<T> ListAll();
 
         public bool CheckIfItemIsThere(string name);
+
+        public bool IfUserWasThere(string userName, string entity);
     }
 }
